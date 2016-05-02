@@ -1,0 +1,24 @@
+{
+  "name": "ajax.email4angular",
+  "version": "0.1.0",
+  "license" : "MIT",
+  "main": "./ajaxEmail.js",
+  "dependencies": {
+    "angular": "^1.0.8"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "component.json",
+    "package.json",
+    "lib",
+    "config",
+    "sample",
+    "test",
+    "tests",
+    "ngdoc_assets",
+    "Gruntfile.js",
+    "files.js"
+  ]
+}
