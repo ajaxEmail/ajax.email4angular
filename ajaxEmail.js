@@ -1,6 +1,6 @@
 /**
  * ajax.email for AngularJS
- * @version v0.1.0
+ * @version v0.1.1
  * @link http://ajax.email/
  * @license MIT License, http://www.opensource.org/licenses/MIT
  */

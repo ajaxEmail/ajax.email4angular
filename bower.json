@@ -1,6 +1,6 @@
 {
   "name": "ajax.email4angular",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license" : "MIT",
   "main": "./ajaxEmail.js",
   "dependencies": {
