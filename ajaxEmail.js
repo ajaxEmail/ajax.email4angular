@@ -42,27 +42,16 @@ if (typeof module !== "undefined" && typeof exports !== "undefined" && module.ex
  * </pre>
  */
 angular.module('ajax.email', []);
-  var apiKey = '';
-  var globalOptions = {
-    from undefined,
-    to: undefined,
-    subject: undefined,
-    text: undefined,
-    html: undefined
-  };
 
 /**
  * @ngdoc object
  * @name ajax.email.$send
  *
- * @requires $q
- * @requires $http
- *
  * @description
  * Send an email.
  */
-ajaxEmail.$inject = ['$http'];
-function ajaxEmail(  $http ) {
+
+function AjaxEmail($http, apiKey, globalOptions) {
 
   /**
    * @ngdoc function
@@ -79,6 +68,7 @@ function ajaxEmail(  $http ) {
    * @return {promise} the $http promise calling the ajax.email service
    */
   this.send = function (emailOptions) {
+    console.log('ajax.email SEND',apiKey,globalOptions,emailOptions, $http);
     return $http({
       method: 'POST',
       url: 'http://ajax.email/v1/send',
@@ -91,9 +81,6 @@ function ajaxEmail(  $http ) {
   }
 }
 
-angular.module('ajax.email').service('ajaxEmail', ajaxEmail);
-
-
 /**
  * @ngdoc object
  * @name ajax.email.ajaxEmailSetup
@@ -101,34 +88,41 @@ angular.module('ajax.email').service('ajaxEmail', ajaxEmail);
  * @description
  * `ajaxEmailSetup` is used to configure the propper apiKey. 
  */
-ajaxEmailSetup.$inject = [];
-function ajaxEmailSetup() {
+AjaxEmailProvider.$inject = [];
+function AjaxEmailProvider() {
+    var apiKey = '';
+    var globalOptions = {};
+    /**
+    * @ngdoc function
+    * @name ajax.email.ajaxEmailSetup#setApiKey
+    * @methodOf ajax.email.ajaxEmailSetup
+    *
+    * @description
+    * Set the apiKey for this service.
+    *
+    * @example
+    * <pre>
+    * var app = angular.module('app', ['ajax.email']);
+    *
+    * app.config(function (ajaxEmailSetup) {
+    *   // Set the apiKey for ajaxEmail
+    *   ajaxEmailSetup.setApiKey('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx');
+    * </pre>
+    *
+    * @param {apiKey} the api key get from the ajax.email website for this project.
+    *
+    * @return {undefined}
+    */
+    this.setApiKey = function (projectApiKey) {
+        apiKey = projectApiKey;
+    };
 
-  /**
-   * @ngdoc function
-   * @name ajax.email.ajaxEmailSetup#setApiKey
-   * @methodOf ajax.email.ajaxEmailSetup
-   *
-   * @description
-   * Set the apiKey for this service.
-   *
-   * @example
-   * <pre>
-   * var app = angular.module('app', ['ajax.email']);
-   *
-   * app.config(function (ajaxEmailSetup) {
-   *   // Set the apiKey for ajaxEmail
-   *   ajaxEmailSetup.setApiKey('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx');
-   * </pre>
-   *
-   * @param {apiKey} the api key get from the ajax.email website for this project.
-   *
-   * @return {undefined}
-   */
-  this.setApiKey = function (projectApiKey) {
-    apiKey = projectApiKey;
-  };
+    this.$get = $get;
+    $get.$inject = ['$http'];
+    function $get(   $http ) {
+        return new AjaxEmail($http, apiKey, globalOptions);
+    }
 }
-angular.module('ajax.email').provider('ajaxEmailSetup', ajaxEmailSetup);
+angular.module('ajax.email').provider('ajaxEmail', AjaxEmailProvider);
 
 })(window, window.angular);
