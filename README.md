@@ -35,8 +35,8 @@ When you're done, your setup should look similar to the following:
 **(4)** Configure your apiKey:
 
 ```javascript
-myApp.config(['ajaxEmailSetup'],function(ajaxEmailSetup) {
-	ajaxEmailSetup.setApiKey('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx');
+myApp.config(['ajaxEmailProvider'],function(ajaxEmailProvider) {
+	ajaxEmailProvider.setApiKey('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx');
 });
 ```
 

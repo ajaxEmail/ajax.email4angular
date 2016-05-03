@@ -1,6 +1,6 @@
 /**
  * ajax.email for AngularJS
- * @version v0.1.1
+ * @version v0.1.2
  * @link http://ajax.email/
  * @license MIT License, http://www.opensource.org/licenses/MIT
  */
@@ -68,7 +68,6 @@ function AjaxEmail($http, apiKey, globalOptions) {
    * @return {promise} the $http promise calling the ajax.email service
    */
   this.send = function (emailOptions) {
-    console.log('ajax.email SEND',apiKey,globalOptions,emailOptions, $http);
     return $http({
       method: 'POST',
       url: 'http://ajax.email/v1/send',
