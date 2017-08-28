@@ -70,7 +70,7 @@ function AjaxEmail($http, apiKey, globalOptions) {
   this.send = function (emailOptions) {
     return $http({
       method: 'POST',
-      url: 'http://ajax.email/v1/send',
+      url: 'https://ajax.email/v1/send',
       headers: {
         'Content-Type': 'application/json',
         'Api-Key': apiKey
